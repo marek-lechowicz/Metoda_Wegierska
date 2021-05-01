@@ -31,7 +31,31 @@ class Matrix:
 
         return reduction_sum
 
+    def searching_independent_zero(self):
 
+        independent_row = []
+        independent_col = []
+        # DO POPRAWY poniższy kod  zadziała tylko w korzystnym przypadku, nie miałem lepszego pomysłu
+        for row in range(self.size):
+            for col in range(self.size):
+                if (self.matrix[row][col] == 0) and (row not in independent_row) and (col not in independent_col):
+                    independent_row.append(row)
+                    independent_col.append(col)
+                    break
+
+        independent = []
+        for element in range(len(independent_row)):
+            index = (independent_row[element], independent_col[element])
+            independent.append(index)
+
+        return independent
+    
+    def get_result(self):   # zwracanie wyniku końcowego jeśli liczba nizależnych zer jest równa rozmiarowi macierzy
+
+        result = self.searching_independent_zero()
+        if len(result) == self.size:
+            return result
+        
 # to w celach testowych było, macierz jest z jego przykładu, można wywalić
 if __name__ == '__main__':
     matrix_example = Matrix([
